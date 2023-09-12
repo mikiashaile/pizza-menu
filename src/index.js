@@ -36,7 +36,12 @@ function Menu() {
 }
 
 function Footer() {
-  return <footer>We are open {new Date().toLocaleDateString()}</footer>;
+  const hour = new Date().getHours();
+  const isOpen = hour >= 10 && hour <= 23;
+  const footerMessage = isOpen
+    ? "We are currently open"
+    : "Sorry we are closed. We will be open tommorow at 10am";
+  return <footer>{footerMessage}</footer>;
 }
 
 const root = ReactDom.createRoot(document.getElementById("root"));
