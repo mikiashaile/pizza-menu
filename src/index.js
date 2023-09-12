@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDom from "react-dom/client";
+import "./index.css";
 
 function App() {
   return (
-    <div>
+    <div className="container">
       <Header />
       <Menu />
       <Footer />
@@ -15,23 +16,27 @@ function Pizzas() {
   return (
     <div>
       <img src="pizzas/focaccia.jpg" alt="ficcacia" />
-      <h2>Focaccia</h2>
+      <h3>Focaccia</h3>
       <p>Bread with italian olive oil and rosemary</p>
     </div>
   );
 }
 
 function Header() {
-  return <h1>Mission Impizzable Pizzeria</h1>;
+  return (
+    <header className="header">
+      <h1>Mission Impizzable Pizzeria</h1>
+    </header>
+  );
 }
 
 function Menu() {
   return (
-    <div>
+    <main className="menu">
       <Pizzas />
       <Pizzas />
       <Pizzas />
-    </div>
+    </main>
   );
 }
 
@@ -41,7 +46,7 @@ function Footer() {
   const footerMessage = isOpen
     ? "We are currently open"
     : "Sorry we are closed. We will be open tommorow at 10am";
-  return <footer>{footerMessage}</footer>;
+  return <footer className="footer">{footerMessage}</footer>;
 }
 
 const root = ReactDom.createRoot(document.getElementById("root"));
