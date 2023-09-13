@@ -82,11 +82,17 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <ul className="pizzas">
-        {pizzaData.map((pizza, index) => (
-          <Pizza pizzaObj={pizza} key={index} />
-        ))}
-      </ul>
+      {pizzaData.length > 0 ? (
+        <ul className="pizzas">
+          {pizzaData.map((pizza, index) => (
+            <Pizza pizzaObj={pizza} key={index} />
+          ))}
+        </ul>
+      ) : (
+        <p>
+          Our Pizzas are so popular that we don't have anything on the menu now.
+        </p>
+      )}
     </main>
   );
 }
@@ -94,10 +100,16 @@ function Menu() {
 function Footer() {
   const hour = new Date().getHours();
   const isOpen = hour >= 10 && hour <= 23;
-  const footerMessage = isOpen
-    ? "We are currently open"
-    : "Sorry we are closed. We will be open tommorow at 10am";
-  return <footer className="footer">{footerMessage}</footer>;
+  return (
+    <footer className="footer">
+      {isOpen && (
+        <div className="order">
+          <p>We are open! Come and visit us or order online</p>
+          <button className="btn">Order</button>
+        </div>
+      )}
+    </footer>
+  );
 }
 
 const root = ReactDom.createRoot(document.getElementById("root"));

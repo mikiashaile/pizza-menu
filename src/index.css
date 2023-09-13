@@ -163,12 +163,12 @@ body {
 }
 
 .btn {
-  color: inherit;
+  color: white;
   font-family: inherit;
   border: none;
   font-size: 1.4rem;
   font-weight: 500;
-  background-color: #edc84b;
+  background-color: #7c4c91;
   padding: 1.4rem 3.2rem;
   cursor: pointer;
   transition: all 0.2s;
