@@ -57,19 +57,6 @@ function App() {
   );
 }
 
-function Pizza(props) {
-  return (
-    <li className="pizza">
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
-      <div>
-        <h3>{props.pizzaObj.name}</h3>
-        <p>{props.pizzaObj.ingredients}</p>
-        <span>{props.pizzaObj.price}</span>
-      </div>
-    </li>
-  );
-}
-
 function Header() {
   return (
     <header className="header">
@@ -83,17 +70,33 @@ function Menu() {
     <main className="menu">
       <h2>Our Menu</h2>
       {pizzaData.length > 0 ? (
-        <ul className="pizzas">
-          {pizzaData.map((pizza, index) => (
-            <Pizza pizzaObj={pizza} key={index} />
-          ))}
-        </ul>
+        <>
+          <p>Authentic Italina Pizza! With 5 stars yelp stars</p>
+          <ul className="pizzas">
+            {pizzaData.map((pizza, index) => (
+              <Pizza pizzaObj={pizza} key={index} />
+            ))}
+          </ul>
+        </>
       ) : (
         <p>
           Our Pizzas are so popular that we don't have anything on the menu now.
         </p>
       )}
     </main>
+  );
+}
+
+function Pizza({ pizzaObj }) {
+  return (
+    <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
+      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
+      <div>
+        <h3>{pizzaObj.name}</h3>
+        <p>{pizzaObj.ingredients}</p>
+        <span>{pizzaObj.soldOut ? "SOLD OUT" : pizzaObj.price}</span>
+      </div>
+    </li>
   );
 }
 
