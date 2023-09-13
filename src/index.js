@@ -1,57 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactDom from "react-dom/client";
 import "./index.css";
 
-const pizzaData = [
-  {
-    name: "Focaccia",
-    ingredients: "Bread with italian olive oil and rosemary",
-    price: 6,
-    photoName: "pizzas/focaccia.jpg",
-    soldOut: false,
-  },
-  {
-    name: "Pizza Margherita",
-    ingredients: "Tomato and mozarella",
-    price: 10,
-    photoName: "pizzas/margherita.jpg",
-    soldOut: false,
-  },
-  {
-    name: "Pizza Spinaci",
-    ingredients: "Tomato, mozarella, spinach, and ricotta cheese",
-    price: 12,
-    photoName: "pizzas/spinaci.jpg",
-    soldOut: false,
-  },
-  {
-    name: "Pizza Funghi",
-    ingredients: "Tomato, mozarella, mushrooms, and onion",
-    price: 12,
-    photoName: "pizzas/funghi.jpg",
-    soldOut: false,
-  },
-  {
-    name: "Pizza Salamino",
-    ingredients: "Tomato, mozarella, and pepperoni",
-    price: 15,
-    photoName: "pizzas/salamino.jpg",
-    soldOut: true,
-  },
-  {
-    name: "Pizza Prosciutto",
-    ingredients: "Tomato, mozarella, ham, aragula, and burrata cheese",
-    price: 18,
-    photoName: "pizzas/prosciutto.jpg",
-    soldOut: false,
-  },
-];
-
 function App() {
+  const [pizzas, setPizzas] = useState("");
+  async function getPizzas() {
+    const res = await fetch("./data.json");
+    const data = await res.json();
+    setPizzas(data);
+  }
+
+  useEffect(function () {
+    getPizzas();
+  }, []);
+
   return (
     <div className="container">
       <Header />
-      <Menu />
+      <Menu pizzas={pizzas} />
       <Footer />
     </div>
   );
@@ -65,15 +31,15 @@ function Header() {
   );
 }
 
-function Menu() {
+function Menu({ pizzas }) {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      {pizzaData.length > 0 ? (
+      {pizzas.length > 0 ? (
         <>
           <p>Authentic Italina Pizza! With 5 stars yelp stars</p>
           <ul className="pizzas">
-            {pizzaData.map((pizza, index) => (
+            {pizzas.map((pizza, index) => (
               <Pizza pizzaObj={pizza} key={index} />
             ))}
           </ul>
